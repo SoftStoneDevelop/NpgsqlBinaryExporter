@@ -13,6 +13,9 @@ namespace NpgsqlBenchmark.Benchmarks
     [HideColumns("Error", "StdDev", "Median", "RatioSD")]
     public class BinaryImportMap
     {
+        [Params(5, 10, 20)]
+        public int Operations;
+
         private NpgsqlConnection _connection;
 
         [GlobalSetup]
@@ -34,16 +37,22 @@ namespace NpgsqlBenchmark.Benchmarks
             _connection?.Dispose();
         }
 
-        [Benchmark(Description = $"NpgsqlQuery", OperationsPerInvoke = 5)]
+        [Benchmark(Description = $"NpgsqlQuery")]
         public void NpgsqlQuery()
         {
-            var persons = _connection.NpgsqlQueryTable().ToList();
+            for (int i = 0; i < Operations; i++)
+            {
+                var persons = _connection.NpgsqlQueryTable().ToList();
+            }
         }
 
-        [Benchmark(Baseline = true, Description = "NpgsqlBinaryImport", OperationsPerInvoke = 5)]
+        [Benchmark(Baseline = true, Description = "NpgsqlBinaryImport")]
         public void NpgsqlBinaryImport()
         {
-            var persons = _connection.NpgsqlBinaryImportTable().ToList();
+            for (int i = 0; i < Operations; i++)
+            {
+                var persons = _connection.NpgsqlBinaryImportTable().ToList();
+            }
         }
     }
 }
