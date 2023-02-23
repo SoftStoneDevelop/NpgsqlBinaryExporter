@@ -13,7 +13,7 @@ namespace NpgsqlBenchmark.Benchmarks
     [HideColumns("Error", "StdDev", "Median", "RatioSD")]
     public class BinaryImportMap
     {
-        [Params(5, 10, 20)]
+        [Params(1, 2, 3)]
         public int Operations;
 
         private NpgsqlConnection _connection;
