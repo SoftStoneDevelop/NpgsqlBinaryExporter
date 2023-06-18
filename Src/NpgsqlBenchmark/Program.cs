@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using NpgsqlBenchmark.Benchmarks;
+using NpgsqlBenchmark.Tests;
 using System;
 using System.IO;
 
@@ -11,6 +12,9 @@ namespace NpgsqlBenchmark
     {
         static void Main(string[] args)
         {
+            var testChar = new CharExportTest();
+            testChar.Test();
+
             //FillTestDatabase();
             BenchmarkRunner.Run<BinaryImportMap>();
         }
