@@ -12,6 +12,9 @@ namespace NpgsqlBenchmark
     {
         static void Main(string[] args)
         {
+            var boxTest = new BoxTest();
+            boxTest.Test();
+
             var testChar = new CharExportTest();
             testChar.Test();
 
